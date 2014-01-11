@@ -1,0 +1,17 @@
+tracing fun:
+
+node --trace_opt --trace_deopt --trace_inlining --code-comments --log_code --profile_hydrogen_code_stub_compilation --noconcurrent-recompilation --allow_natives_syntax  vector.js
+
+
+  ../node/node  --print-code-stubs --code-comments
+
+--print-code --print-code-stubs --print-opt-code --code-comments
+
+GYP_DEFINES="v8_enable_disassembler=1 v8_object_print=1" ./configure
+
+
+If you would like to investigate IR used by optimizing compiler use --trace-hydrogen and look at hydrogen.cfg (it can be viewed with C1 Visualizer).
+
+~/src/v8/out/x64.debug/d8  --print_opt_code --code_comments ~/src/meta/null.js
+
+ ~/src/v8/out/x64.debug/d8  --print_opt_code --code_comments --allow_natives_syntax --noconcurrent-recompilation ~/src/meta/foo.js | vim -

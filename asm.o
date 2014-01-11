@@ -1,0 +1,310 @@
+--- Raw source ---
+(a) {
+  return a === null;
+}
+
+
+--- Optimized code ---
+source_position = 15
+kind = OPTIMIZED_FUNCTION
+name = isNull
+stack_slots = 0
+Instructions (size = 94)
+0x299b7fd56f40     0  55             push rbp
+0x299b7fd56f41     1  4889e5         REX.W movq rbp,rsp
+0x299b7fd56f44     4  56             push rsi
+0x299b7fd56f45     5  57             push rdi
+                  ;;; <@0,#0> -------------------- B0 --------------------
+                  ;;; <@2,#1> context
+0x299b7fd56f46     6  488b75f8       REX.W movq rsi,[rbp-0x8]
+                  ;;; <@10,#8> -------------------- B1 --------------------
+                  ;;; <@12,#10> stack-check
+0x299b7fd56f4a    10  493b6568       REX.W cmpq rsp,[r13+0x68]
+0x299b7fd56f4e    14  7305           jnc 21  (0x299b7fd56f55)
+0x299b7fd56f50    16  e8ab85fdff     call StackCheck  (0x299b7fd2f500)    ;; code: BUILTIN
+                  ;;; <@14,#13> gap
+0x299b7fd56f55    21  488b4510       REX.W movq rax,[rbp+0x10]    ;; debug: position 32
+                  ;;; <@15,#13> cmp-object-eq-and-branch
+0x299b7fd56f59    25  49ba0141402ce93c0000 REX.W movq r10,0x3ce92c404101    ;; object: 0x3ce92c404101 <null>
+0x299b7fd56f63    35  493bc2         REX.W cmpq rax,r10
+0x299b7fd56f66    38  0f840f000000   jz 59  (0x299b7fd56f7b)
+                  ;;; <@16,#19> -------------------- B2 --------------------
+                  ;;; <@18,#21> gap
+0x299b7fd56f6c    44  48b88141402ce93c0000 REX.W movq rax,0x3ce92c404181    ;; object: 0x3ce92c404181 <false>
+                  ;;; <@19,#21> goto
+0x299b7fd56f76    54  e90a000000     jmp 69  (0x299b7fd56f85)
+                  ;;; <@20,#16> -------------------- B3 --------------------
+                  ;;; <@22,#18> gap
+0x299b7fd56f7b    59  48b86141402ce93c0000 REX.W movq rax,0x3ce92c404161    ;; object: 0x3ce92c404161 <true>
+                  ;;; <@24,#23> -------------------- B4 --------------------
+                  ;;; <@26,#25> return
+0x299b7fd56f85    69  488be5         REX.W movq rsp,rbp
+0x299b7fd56f88    72  5d             pop rbp
+0x299b7fd56f89    73  c21000         ret 0x10
+                  ;;; Safepoint table.
+
+Deoptimization Input Data (deopt points = 1)
+ index  ast id    argc     pc             
+     0       3       0     21
+
+Safepoints (size = 18)
+0x299b7fd56f55    21  11111111 (sp -> fp)       0
+
+RelocInfo (size = 165)
+0x299b7fd56f46  comment  (;;; <@0,#0> -------------------- B0 --------------------)
+0x299b7fd56f46  comment  (;;; <@2,#1> context)
+0x299b7fd56f4a  comment  (;;; <@10,#8> -------------------- B1 --------------------)
+0x299b7fd56f4a  comment  (;;; <@12,#10> stack-check)
+0x299b7fd56f51  code target (BUILTIN)  (0x299b7fd2f500)
+0x299b7fd56f55  comment  (;;; <@14,#13> gap)
+0x299b7fd56f55  position  (32)
+0x299b7fd56f59  comment  (;;; <@15,#13> cmp-object-eq-and-branch)
+0x299b7fd56f5b  embedded object  (0x3ce92c404101 <null>)
+0x299b7fd56f6c  comment  (;;; <@16,#19> -------------------- B2 --------------------)
+0x299b7fd56f6c  comment  (;;; <@18,#21> gap)
+0x299b7fd56f6e  embedded object  (0x3ce92c404181 <false>)
+0x299b7fd56f76  comment  (;;; <@19,#21> goto)
+0x299b7fd56f7b  comment  (;;; <@20,#16> -------------------- B3 --------------------)
+0x299b7fd56f7b  comment  (;;; <@22,#18> gap)
+0x299b7fd56f7d  embedded object  (0x3ce92c404161 <true>)
+0x299b7fd56f85  comment  (;;; <@24,#23> -------------------- B4 --------------------)
+0x299b7fd56f85  comment  (;;; <@26,#25> return)
+0x299b7fd56f8c  comment  (;;; Safepoint table.)
+
+--- End code ---
+--- Raw source ---
+function isNull(a) {
+  return a === null;
+}
+
+while (true) {
+  isNull({});
+}
+
+
+--- Optimized code ---
+source_position = 0
+kind = OPTIMIZED_FUNCTION
+stack_slots = 2
+Instructions (size = 456)
+0x299b7fd57180     0  55             push rbp
+0x299b7fd57181     1  4889e5         REX.W movq rbp,rsp
+0x299b7fd57184     4  56             push rsi
+0x299b7fd57185     5  57             push rdi
+0x299b7fd57186     6  4883ec10       REX.W subq rsp,0x10
+                  ;;; <@0,#0> -------------------- B0 --------------------
+                  ;;; <@2,#1> context
+0x299b7fd5718a    10  488b45f8       REX.W movq rax,[rbp-0x8]
+                  ;;; <@3,#1> gap
+0x299b7fd5718e    14  488945e0       REX.W movq [rbp-0x20],rax
+                  ;;; <@8,#7> -------------------- B1 --------------------
+                  ;;; <@9,#7> gap
+0x299b7fd57192    18  488bf0         REX.W movq rsi,rax
+                  ;;; <@10,#8> declare-globals
+0x299b7fd57195    21  56             push rsi
+0x299b7fd57196    22  49ba91a142c9a91e0000 REX.W movq r10,0x1ea9c942a191    ;; object: 0x1ea9c942a191 <FixedArray[2]>
+0x299b7fd571a0    32  4152           push r10
+0x299b7fd571a2    34  6a00           push 0x0
+0x299b7fd571a4    36  b803000000     movl rax,0x3
+0x299b7fd571a9    41  498d9de8175cfe REX.W leaq rbx,[r13-0x1a3e818]
+0x299b7fd571b0    48  e80bf8faff     call 0x299b7fd069c0     ;; code: STUB, CEntryStub, minor: 0
+                  ;;; <@12,#9> lazy-bailout
+                  ;;; <@13,#9> gap
+0x299b7fd571b5    53  488b75e0       REX.W movq rsi,[rbp-0x20]
+                  ;;; <@14,#10> stack-check
+0x299b7fd571b9    57  493b6568       REX.W cmpq rsp,[r13+0x68]
+0x299b7fd571bd    61  7305           jnc 68  (0x299b7fd571c4)
+0x299b7fd571bf    63  e83c83fdff     call StackCheck  (0x299b7fd2f500)    ;; code: BUILTIN
+                  ;;; <@17,#12> goto
+0x299b7fd571c4    68  e911000000     jmp 90  (0x299b7fd571da)
+                  ;;; <@18,#16> -------------------- B2 (OSR entry) --------------------
+0x299b7fd571c9    73  4883ec08       REX.W subq rsp,0x8
+                  ;;; <@28,#22> context
+0x299b7fd571cd    77  488b45f8       REX.W movq rax,[rbp-0x8]
+                  ;;; <@30,#24> gap
+0x299b7fd571d1    81  488b5d10       REX.W movq rbx,[rbp+0x10]
+                  ;;; <@31,#24> goto
+0x299b7fd571d5    85  e908000000     jmp 98  (0x299b7fd571e2)
+                  ;;; <@32,#13> -------------------- B3 --------------------
+                  ;;; <@34,#15> gap
+0x299b7fd571da    90  488b5d10       REX.W movq rbx,[rbp+0x10]
+0x299b7fd571de    94  488b45e0       REX.W movq rax,[rbp-0x20]
+                  ;;; <@36,#31> -------------------- B4 (unreachable/replaced) --------------------
+                  ;;; <@40,#34> -------------------- B5 (loop header) --------------------
+                  ;;; <@42,#36> stack-check
+0x299b7fd571e2    98  493b6568       REX.W cmpq rsp,[r13+0x68]
+0x299b7fd571e6   102  0f828f000000   jc 251  (0x299b7fd5727b)
+                  ;;; <@44,#39> allocate
+0x299b7fd571ec   108  498b8dd0090000 REX.W movq rcx,[r13+0x9d0]
+0x299b7fd571f3   115  488bd1         REX.W movq rdx,rcx
+0x299b7fd571f6   118  4883c218       REX.W addq rdx,0x18
+0x299b7fd571fa   122  0f82bc000000   jc 316  (0x299b7fd572bc)
+0x299b7fd57200   128  493b95d8090000 REX.W cmpq rdx,[r13+0x9d8]
+0x299b7fd57207   135  0f87af000000   ja 316  (0x299b7fd572bc)
+0x299b7fd5720d   141  498995d0090000 REX.W movq [r13+0x9d0],rdx
+0x299b7fd57214   148  48ffc1         REX.W incq rcx
+                  ;;; <@46,#41> store-named-field
+0x299b7fd57217   151  49bab1c08087fa0a0000 REX.W movq r10,0xafa8780c0b1    ;; object: 0xafa8780c0b1 <Map(elements=3)>
+0x299b7fd57221   161  4c8951ff       REX.W movq [rcx-0x1],r10
+                  ;;; <@48,#43> store-named-field
+0x299b7fd57225   165  49ba394180b06f280000 REX.W movq r10,0x286fb0804139    ;; object: 0x286fb0804139 <FixedArray[0]>
+0x299b7fd5722f   175  4c895107       REX.W movq [rcx+0x7],r10
+                  ;;; <@50,#45> store-named-field
+0x299b7fd57233   179  49ba394180b06f280000 REX.W movq r10,0x286fb0804139    ;; object: 0x286fb0804139 <FixedArray[0]>
+0x299b7fd5723d   189  4c89510f       REX.W movq [rcx+0xf],r10
+                  ;;; <@52,#46> constant-t
+0x299b7fd57241   193  48ba119d42c9a91e0000 REX.W movq rdx,0x1ea9c9429d11    ;; object: 0x1ea9c9429d11 <JS Function isNull (SharedFunctionInfo 0x1ea9c9429b11)>
+                  ;;; <@54,#49> load-named-field
+0x299b7fd5724b   203  488b522f       REX.W movq rdx,[rdx+0x2f]
+                  ;;; <@56,#50> load-named-field
+0x299b7fd5724f   207  488b5227       REX.W movq rdx,[rdx+0x27]
+                  ;;; <@58,#51> load-named-field
+0x299b7fd57253   211  488b522f       REX.W movq rdx,[rdx+0x2f]
+                  ;;; <@61,#57> cmp-object-eq-and-branch
+0x299b7fd57257   215  49ba0141402ce93c0000 REX.W movq r10,0x3ce92c404101    ;; debug: position 32
+                                                             ;; object: 0x3ce92c404101 <null>
+0x299b7fd57261   225  493bca         REX.W cmpq rcx,r10
+0x299b7fd57264   228  0f8407000000   jz 241  (0x299b7fd57271)
+                  ;;; <@62,#62> -------------------- B6 --------------------
+                  ;;; <@64,#64> gap
+0x299b7fd5726a   234  33d2           xorl rdx,rdx
+                  ;;; <@65,#64> goto
+0x299b7fd5726c   236  e971ffffff     jmp 98  (0x299b7fd571e2)
+                  ;;; <@66,#59> -------------------- B7 --------------------
+                  ;;; <@68,#61> gap
+0x299b7fd57271   241  ba01000000     movl rdx,0x1
+                  ;;; <@69,#61> goto
+0x299b7fd57276   246  e967ffffff     jmp 98  (0x299b7fd571e2)
+                  ;;; <@70,#66> -------------------- B8 (unreachable/replaced) --------------------
+                  ;;; <@74,#70> -------------------- B9 (unreachable/replaced) --------------------
+                  ;;; <@42,#36> -------------------- Deferred stack-check --------------------
+0x299b7fd5727b   251  50             push rax
+0x299b7fd5727c   252  51             push rcx
+0x299b7fd5727d   253  52             push rdx
+0x299b7fd5727e   254  53             push rbx
+0x299b7fd5727f   255  56             push rsi
+0x299b7fd57280   256  57             push rdi
+0x299b7fd57281   257  4150           push r8
+0x299b7fd57283   259  4151           push r9
+0x299b7fd57285   261  4153           push r11
+0x299b7fd57287   263  4156           push r14
+0x299b7fd57289   265  4157           push r15
+0x299b7fd5728b   267  488d6424d8     REX.W leaq rsp,[rsp-0x28]
+0x299b7fd57290   272  488b75f8       REX.W movq rsi,[rbp-0x8]
+0x299b7fd57294   276  33c0           xorl rax,rax
+0x299b7fd57296   278  498d9d88855efe REX.W leaq rbx,[r13-0x1a17a78]
+0x299b7fd5729d   285  e87eeffaff     call 0x299b7fd06220     ;; code: STUB, CEntryStub, minor: 1
+0x299b7fd572a2   290  488d642428     REX.W leaq rsp,[rsp+0x28]
+0x299b7fd572a7   295  415f           pop r15
+0x299b7fd572a9   297  415e           pop r14
+0x299b7fd572ab   299  415b           pop r11
+0x299b7fd572ad   301  4159           pop r9
+0x299b7fd572af   303  4158           pop r8
+0x299b7fd572b1   305  5f             pop rdi
+0x299b7fd572b2   306  5e             pop rsi
+0x299b7fd572b3   307  5b             pop rbx
+0x299b7fd572b4   308  5a             pop rdx
+0x299b7fd572b5   309  59             pop rcx
+0x299b7fd572b6   310  58             pop rax
+0x299b7fd572b7   311  e930ffffff     jmp 108  (0x299b7fd571ec)
+                  ;;; <@44,#39> -------------------- Deferred allocate --------------------
+0x299b7fd572bc   316  33c9           xorl rcx,rcx
+0x299b7fd572be   318  50             push rax
+0x299b7fd572bf   319  51             push rcx
+0x299b7fd572c0   320  52             push rdx
+0x299b7fd572c1   321  53             push rbx
+0x299b7fd572c2   322  56             push rsi
+0x299b7fd572c3   323  57             push rdi
+0x299b7fd572c4   324  4150           push r8
+0x299b7fd572c6   326  4151           push r9
+0x299b7fd572c8   328  4153           push r11
+0x299b7fd572ca   330  4156           push r14
+0x299b7fd572cc   332  4157           push r15
+0x299b7fd572ce   334  488d6424d8     REX.W leaq rsp,[rsp-0x28]
+0x299b7fd572d3   339  49ba0000000018000000 REX.W movq r10,0x1800000000
+0x299b7fd572dd   349  4152           push r10
+0x299b7fd572df   351  6a00           push 0x0
+0x299b7fd572e1   353  488bf0         REX.W movq rsi,rax
+0x299b7fd572e4   356  b802000000     movl rax,0x2
+0x299b7fd572e9   361  498d9d48a75efe REX.W leaq rbx,[r13-0x1a158b8]
+0x299b7fd572f0   368  e82beffaff     call 0x299b7fd06220     ;; code: STUB, CEntryStub, minor: 1
+0x299b7fd572f5   373  4889442470     REX.W movq [rsp+0x70],rax
+0x299b7fd572fa   378  488d642428     REX.W leaq rsp,[rsp+0x28]
+0x299b7fd572ff   383  415f           pop r15
+0x299b7fd57301   385  415e           pop r14
+0x299b7fd57303   387  415b           pop r11
+0x299b7fd57305   389  4159           pop r9
+0x299b7fd57307   391  4158           pop r8
+0x299b7fd57309   393  5f             pop rdi
+0x299b7fd5730a   394  5e             pop rsi
+0x299b7fd5730b   395  5b             pop rbx
+0x299b7fd5730c   396  5a             pop rdx
+0x299b7fd5730d   397  59             pop rcx
+0x299b7fd5730e   398  58             pop rax
+0x299b7fd5730f   399  e903ffffff     jmp 151  (0x299b7fd57217)
+                  ;;; Safepoint table.
+
+Deoptimization Input Data (deopt points = 4)
+ index  ast id    argc     pc             
+     0       3       0     53
+     1       3       0     68
+     2      10       0     -1
+     3      11       0    108
+
+Safepoints (size = 52)
+0x299b7fd571b5    53  10 (sp -> fp)       0
+0x299b7fd571c4    68  10 (sp -> fp)       1
+0x299b7fd572a2   290  00 | rax | rbx (sp -> fp)       3
+0x299b7fd572f5   373  00 | rax | rcx | rbx (sp -> fp)  <none> argc: 2
+
+RelocInfo (size = 446)
+0x299b7fd5718a  comment  (;;; <@0,#0> -------------------- B0 --------------------)
+0x299b7fd5718a  comment  (;;; <@2,#1> context)
+0x299b7fd5718e  comment  (;;; <@3,#1> gap)
+0x299b7fd57192  comment  (;;; <@8,#7> -------------------- B1 --------------------)
+0x299b7fd57192  comment  (;;; <@9,#7> gap)
+0x299b7fd57195  comment  (;;; <@10,#8> declare-globals)
+0x299b7fd57198  embedded object  (0x1ea9c942a191 <FixedArray[2]>)
+0x299b7fd571b1  code target (STUB)  (0x299b7fd069c0)
+0x299b7fd571b5  comment  (;;; <@12,#9> lazy-bailout)
+0x299b7fd571b5  comment  (;;; <@13,#9> gap)
+0x299b7fd571b9  comment  (;;; <@14,#10> stack-check)
+0x299b7fd571c0  code target (BUILTIN)  (0x299b7fd2f500)
+0x299b7fd571c4  comment  (;;; <@17,#12> goto)
+0x299b7fd571c9  comment  (;;; <@18,#16> -------------------- B2 (OSR entry) --------------------)
+0x299b7fd571cd  comment  (;;; <@28,#22> context)
+0x299b7fd571d1  comment  (;;; <@30,#24> gap)
+0x299b7fd571d5  comment  (;;; <@31,#24> goto)
+0x299b7fd571da  comment  (;;; <@32,#13> -------------------- B3 --------------------)
+0x299b7fd571da  comment  (;;; <@34,#15> gap)
+0x299b7fd571e2  comment  (;;; <@36,#31> -------------------- B4 (unreachable/replaced) --------------------)
+0x299b7fd571e2  comment  (;;; <@40,#34> -------------------- B5 (loop header) --------------------)
+0x299b7fd571e2  comment  (;;; <@42,#36> stack-check)
+0x299b7fd571ec  comment  (;;; <@44,#39> allocate)
+0x299b7fd57217  comment  (;;; <@46,#41> store-named-field)
+0x299b7fd57219  embedded object  (0xafa8780c0b1 <Map(elements=3)>)
+0x299b7fd57225  comment  (;;; <@48,#43> store-named-field)
+0x299b7fd57227  embedded object  (0x286fb0804139 <FixedArray[0]>)
+0x299b7fd57233  comment  (;;; <@50,#45> store-named-field)
+0x299b7fd57235  embedded object  (0x286fb0804139 <FixedArray[0]>)
+0x299b7fd57241  comment  (;;; <@52,#46> constant-t)
+0x299b7fd57243  embedded object  (0x1ea9c9429d11 <JS Function isNull (SharedFunctionInfo 0x1ea9c9429b11)>)
+0x299b7fd5724b  comment  (;;; <@54,#49> load-named-field)
+0x299b7fd5724f  comment  (;;; <@56,#50> load-named-field)
+0x299b7fd57253  comment  (;;; <@58,#51> load-named-field)
+0x299b7fd57257  position  (32)
+0x299b7fd57257  comment  (;;; <@61,#57> cmp-object-eq-and-branch)
+0x299b7fd57259  embedded object  (0x3ce92c404101 <null>)
+0x299b7fd5726a  comment  (;;; <@62,#62> -------------------- B6 --------------------)
+0x299b7fd5726a  comment  (;;; <@64,#64> gap)
+0x299b7fd5726c  comment  (;;; <@65,#64> goto)
+0x299b7fd57271  comment  (;;; <@66,#59> -------------------- B7 --------------------)
+0x299b7fd57271  comment  (;;; <@68,#61> gap)
+0x299b7fd57276  comment  (;;; <@69,#61> goto)
+0x299b7fd5727b  comment  (;;; <@70,#66> -------------------- B8 (unreachable/replaced) --------------------)
+0x299b7fd5727b  comment  (;;; <@74,#70> -------------------- B9 (unreachable/replaced) --------------------)
+0x299b7fd5727b  comment  (;;; <@42,#36> -------------------- Deferred stack-check --------------------)
+0x299b7fd5729e  code target (STUB)  (0x299b7fd06220)
+0x299b7fd572bc  comment  (;;; <@44,#39> -------------------- Deferred allocate --------------------)
+0x299b7fd572f1  code target (STUB)  (0x299b7fd06220)
+0x299b7fd57314  comment  (;;; Safepoint
