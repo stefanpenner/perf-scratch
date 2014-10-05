@@ -98,6 +98,90 @@ Array.prototype.contains2 = function contains2(searchElement /*, fromIndex */) {
   return false;
 };
 
+Array.prototype.contains3 = function contains1(searchElement /*, fromIndex */) {
+  var l = this.length;
+
+  if (l=== 0) {
+    return false;
+  }
+
+  var n = arguments.length === 2 ? arguments[1] : 0;
+
+  // 8. If n ≥ len, return false.
+  if (n >= l) {
+    return false;
+  }
+
+  var k;
+
+  if (n >= 0) {
+    k = n;
+  } else {
+    k = l - Math.abs(n);
+    if (k < 0) {
+      k = 0;
+    }
+  }
+
+  if (searchElement !== searchElement) {
+    return containsNan(this, k, l);
+  } else {
+    while (k < l) {
+      var elementK = this[k];
+
+      if (searchElement === elementK) {
+        return true;
+      }
+
+      k++;
+    }
+  }
+
+  return false;
+};
+
+Array.prototype.contains5 = function contains1(searchElement /*, fromIndex */) {
+  var l = this.length;
+
+  if (l=== 0) {
+    return false;
+  }
+
+  var n = arguments.length === 2 ? arguments[1] : 0;
+
+  // 8. If n ≥ len, return false.
+  if (n >= l) {
+    return false;
+  }
+
+  var k;
+
+  if (n >= 0) {
+    k = n;
+  } else {
+    k = l - Math.abs(n);
+    if (k < 0) {
+      k = 0;
+    }
+  }
+
+  var nan = searchElement !== searchElement;
+  while (k < l) {
+    var elementK = this[k];
+
+    if (nan === true && elementK !== elementK ||
+        searchElement === elementK) {
+      return true;
+    }
+
+    k++;
+  }
+
+  return false;
+};
+
+
+
 var LIMIT = 100;
 var entry = Math.random() * LIMIT;
 var list = new Array(LIMIT);
@@ -109,4 +193,7 @@ for (var i =0; i< LIMIT; i++) {
 require('./bench')([
   { name: 'contains1', fn: function() { list.contains1(entry); } },
   { name: 'contains2', fn: function() { list.contains2(entry); } },
+  { name: 'contains5', fn: function() { list.contains5(entry); } },
 ]);
+
+

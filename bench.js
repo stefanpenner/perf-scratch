@@ -1,7 +1,7 @@
 var Benchmark = require('benchmark');
 
 function log(message) {
-  if (window) {
+  if (typeof window !== 'undefined') {
     var div = document.createElement('div');
     div.textContent = message;
     document.body.appendChild(div);
