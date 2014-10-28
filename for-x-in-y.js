@@ -1,11 +1,6 @@
 function makeBar() {
   return function bar(obj) {
-    var result = [];
-    for (var key in obj) {
-      result.push(key);
-    }
-
-    return result;
+    return '1' in obj;
   }
 }
 
@@ -33,6 +28,7 @@ var array = [1,2,3];
 function Foo() {
 
 }
+
 var bar = Foo.prototype.bar = makeBar();
 function Baz() { }
 Baz.prototype = Object.create(Foo.prototype);
@@ -48,6 +44,7 @@ Baz.prototype.bar.call(null, dict);
 
 %OptimizeFunctionOnNextCall(bar);
 %OptimizeFunctionOnNextCall(Baz.prototype.bar);
+Baz.prototype.bar.call(null, dict);
 Foo.prototype.bar.call(null, map);
 Foo.prototype.bar.call(null, map);
 Foo.prototype.bar.call(null, map);
