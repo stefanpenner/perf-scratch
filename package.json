@@ -18,5 +18,8 @@
   "homepage": "https://github.com/stefanpenner/perf-scratch",
   "dependencies": {
     "benchmark": "^1.0.0"
+  },
+  "devDependencies": {
+    "benchmark": "^1.0.0"
   }
 }
