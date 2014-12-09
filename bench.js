@@ -4,7 +4,7 @@ function log(message) {
   if (typeof window !== 'undefined') {
     var div = document.createElement('div');
     div.textContent = message;
-    document.body.appendChild(div);
+    document.getElementById('output').appendChild(div);
   } else  {
     console.log(message);
   }

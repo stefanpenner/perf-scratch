@@ -1,5 +1,10 @@
 function foo() {
-  return bar(arguments);
+  if (Math.random() > 0.5) {
+    bar.apply(null, arguments);
+  } else {
+
+  }
+  return 5;
 }
 
 function bar(args) {
