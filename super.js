@@ -57,7 +57,7 @@ function giveMethodSuper(_super, fn) {
     var previousSuper = this._super;
     this._super = _super;
 
-    var result = fn.apply(this, arguments);
+    var result = fn.call(this);
     this._super = previousSuper;
     return result;
   }
