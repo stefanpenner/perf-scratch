@@ -8,18 +8,23 @@ function printStatus(fn) {
   }
 }
 
-function foo(a,b,c) {
-  return [a, b, c];
+function Apple (){
+
 }
 
-function bar() {
-  return foo.apply(null, arguments);
+Apple.prototype.apple = function() {
+  this.orange.apply(this, arguments);
 }
 
-bar(1, 2, 3);
+Apple.prototype.orange  = function() {
+}
 
-%OptimizeFunctionOnNextCall(bar);
+var a = new Apple();
+a.apple(1, 2, 3, 4);
+a.apple(1, 2, 3, 4);
 
-bar(1, 2, 3);
+%OptimizeFunctionOnNextCall(a.apple);
 
-printStatus(bar);
+a.apple(1, 2, 3, 4);
+
+printStatus(a.apple);
