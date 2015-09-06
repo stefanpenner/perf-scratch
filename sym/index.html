@@ -1,0 +1,144 @@
+<body>
+  <div id="output"></div>
+</body>
+<script src="out.js"></script>
+<pre><div class="highlight"><pre><span class="kd">function</span> <span class="nx">intern</span><span class="p">(</span><span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{};</span>
+  <span class="nx">obj</span><span class="p">[</span><span class="nx">str</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">key</span> <span class="o">===</span> <span class="nx">str</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">key</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">str</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">symbol</span><span class="p">(</span><span class="nx">debug</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">intern</span><span class="p">(</span><span class="nx">debug</span> <span class="o">+</span> <span class="s1">&#39; [id=&#39;</span> <span class="o">+</span> <span class="nx">GUID_KEY</span> <span class="o">+</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">())</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">GUID_KEY</span> <span class="o">=</span> <span class="nx">intern</span><span class="p">(</span><span class="s1">&#39;__ember&#39;</span> <span class="o">+</span> <span class="p">(</span><span class="o">+</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">())</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getTime</span><span class="p">());</span>
+
+<span class="kd">function</span> <span class="nx">symbol2</span><span class="p">(</span><span class="nx">debug</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">debug</span> <span class="o">+</span> <span class="s1">&#39; [id=&#39;</span> <span class="o">+</span> <span class="nx">id</span><span class="o">++</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="nx">GUID_KEY</span> <span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">symbol3</span><span class="p">(</span><span class="nx">debug</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">intern</span><span class="p">(</span><span class="nx">debug</span> <span class="o">+</span> <span class="s1">&#39; [id=&#39;</span> <span class="o">+</span> <span class="nx">id</span><span class="o">++</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="nx">GUID_KEY</span> <span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">symbol4</span><span class="p">(</span><span class="nx">debug</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">intern</span><span class="p">(</span><span class="nx">debug</span> <span class="o">+</span> <span class="s1">&#39; id&#39;</span> <span class="o">+</span> <span class="nx">id</span><span class="o">++</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span> <span class="o">+</span> <span class="nx">GUID_KEY</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">symbol5</span><span class="p">(</span><span class="nx">debug</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">debug</span> <span class="o">+</span> <span class="s1">&#39; id&#39;</span> <span class="o">+</span> <span class="nx">id</span><span class="o">++</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span> <span class="o">+</span> <span class="nx">GUID_KEY</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">function</span> <span class="nx">symbol5</span><span class="p">(</span><span class="nx">debug</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">debug</span> <span class="o">+</span> <span class="s1">&#39; id&#39;</span> <span class="o">+</span> <span class="nx">id</span><span class="o">++</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span> <span class="o">+</span> <span class="nx">GUID_KEY</span> <span class="o">+</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">zero_a</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">(</span><span class="s2">&quot;bye&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">zero_b</span> <span class="o">=</span> <span class="nx">Symbol</span><span class="p">(</span><span class="s2">&quot;bye&quot;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">one_a</span> <span class="o">=</span> <span class="nx">symbol</span><span class="p">(</span><span class="s2">&quot;bye&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">one_b</span> <span class="o">=</span> <span class="nx">symbol</span><span class="p">(</span><span class="s2">&quot;bye&quot;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">two_a</span> <span class="o">=</span> <span class="nx">symbol2</span><span class="p">(</span><span class="s2">&quot;bye&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">two_b</span> <span class="o">=</span> <span class="nx">symbol2</span><span class="p">(</span><span class="s2">&quot;bye&quot;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">three_a</span> <span class="o">=</span> <span class="nx">symbol3</span><span class="p">(</span><span class="s2">&quot;bye&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">three_b</span> <span class="o">=</span> <span class="nx">symbol3</span><span class="p">(</span><span class="s2">&quot;bye&quot;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">four_a</span> <span class="o">=</span> <span class="nx">symbol4</span><span class="p">(</span><span class="s2">&quot;bye&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">four_b</span> <span class="o">=</span> <span class="nx">symbol4</span><span class="p">(</span><span class="s2">&quot;bye&quot;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">five_a</span> <span class="o">=</span> <span class="nx">symbol5</span><span class="p">(</span><span class="s2">&quot;bye&quot;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">five_b</span> <span class="o">=</span> <span class="nx">symbol5</span><span class="p">(</span><span class="s2">&quot;bye&quot;</span><span class="p">);</span>
+
+<span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./bench&#39;</span><span class="p">)([</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Symbol&#39;</span><span class="p">,</span>  <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">Symbol</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">);</span> <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;symbol&#39;</span><span class="p">,</span>  <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">symbol</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">);</span> <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;symbol2&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">symbol2</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">);</span> <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;symbol3&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">symbol3</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">);</span> <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;symbol4&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">symbol4</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">);</span> <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;symbol5&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">symbol5</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">);</span> <span class="p">}},</span>
+
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;compare Symbol&#39;</span><span class="p">,</span>  <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">Symbol</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">)</span>  <span class="o">===</span> <span class="nx">Symbol</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">);</span>  <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;compare symbol&#39;</span><span class="p">,</span>  <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">symbol</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">)</span>  <span class="o">===</span> <span class="nx">symbol</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">);</span>  <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;compare symbol2&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">symbol2</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="nx">symbol2</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">);</span> <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;compare symbol3&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">symbol3</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="nx">symbol3</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">);</span> <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;compare symbol4&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">symbol4</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="nx">symbol4</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">);</span> <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;compare symbol5&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">symbol5</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="nx">symbol5</span><span class="p">(</span><span class="s1">&#39;bye&#39;</span><span class="p">);</span> <span class="p">}},</span>
+
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;compare existing Symbol&#39;</span><span class="p">,</span>  <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">zero_a</span>  <span class="o">===</span> <span class="nx">zero_b</span><span class="p">;</span>   <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;compare existing symbol&#39;</span><span class="p">,</span>  <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">one_a</span>   <span class="o">===</span> <span class="nx">one_b</span><span class="p">;</span>   <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;compare existing symbol2&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">two_a</span>   <span class="o">===</span> <span class="nx">two_b</span><span class="p">;</span>   <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;compare existing symbol3&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">three_a</span> <span class="o">===</span> <span class="nx">three_b</span><span class="p">;</span> <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;compare existing symbol4&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">four_a</span>  <span class="o">===</span> <span class="nx">four_b</span><span class="p">;</span>  <span class="p">}},</span>
+  <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;compare existing symbol5&#39;</span><span class="p">,</span> <span class="nx">fn</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">five_a</span>  <span class="o">===</span> <span class="nx">five_b</span><span class="p">;</span>  <span class="p">}}</span>
+<span class="p">]);</span>
+</pre></div> </pre>
+<style>.hll { background-color: #ffffcc }
+.c { color: #888888 } /* Comment */
+.err { color: #FF0000; background-color: #FFAAAA } /* Error */
+.k { color: #008800; font-weight: bold } /* Keyword */
+.o { color: #333333 } /* Operator */
+.cm { color: #888888 } /* Comment.Multiline */
+.cp { color: #557799 } /* Comment.Preproc */
+.c1 { color: #888888 } /* Comment.Single */
+.cs { color: #cc0000; font-weight: bold } /* Comment.Special */
+.gd { color: #A00000 } /* Generic.Deleted */
+.ge { font-style: italic } /* Generic.Emph */
+.gr { color: #FF0000 } /* Generic.Error */
+.gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.gi { color: #00A000 } /* Generic.Inserted */
+.go { color: #888888 } /* Generic.Output */
+.gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.gs { font-weight: bold } /* Generic.Strong */
+.gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.gt { color: #0044DD } /* Generic.Traceback */
+.kc { color: #008800; font-weight: bold } /* Keyword.Constant */
+.kd { color: #008800; font-weight: bold } /* Keyword.Declaration */
+.kn { color: #008800; font-weight: bold } /* Keyword.Namespace */
+.kp { color: #003388; font-weight: bold } /* Keyword.Pseudo */
+.kr { color: #008800; font-weight: bold } /* Keyword.Reserved */
+.kt { color: #333399; font-weight: bold } /* Keyword.Type */
+.m { color: #6600EE; font-weight: bold } /* Literal.Number */
+.s { background-color: #fff0f0 } /* Literal.String */
+.na { color: #0000CC } /* Name.Attribute */
+.nb { color: #007020 } /* Name.Builtin */
+.nc { color: #BB0066; font-weight: bold } /* Name.Class */
+.no { color: #003366; font-weight: bold } /* Name.Constant */
+.nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.ni { color: #880000; font-weight: bold } /* Name.Entity */
+.ne { color: #FF0000; font-weight: bold } /* Name.Exception */
+.nf { color: #0066BB; font-weight: bold } /* Name.Function */
+.nl { color: #997700; font-weight: bold } /* Name.Label */
+.nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.nt { color: #007700 } /* Name.Tag */
+.nv { color: #996633 } /* Name.Variable */
+.ow { color: #000000; font-weight: bold } /* Operator.Word */
+.w { color: #bbbbbb } /* Text.Whitespace */
+.mb { color: #6600EE; font-weight: bold } /* Literal.Number.Bin */
+.mf { color: #6600EE; font-weight: bold } /* Literal.Number.Float */
+.mh { color: #005588; font-weight: bold } /* Literal.Number.Hex */
+.mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
+.mo { color: #4400EE; font-weight: bold } /* Literal.Number.Oct */
+.sb { background-color: #fff0f0 } /* Literal.String.Backtick */
+.sc { color: #0044DD } /* Literal.String.Char */
+.sd { color: #DD4422 } /* Literal.String.Doc */
+.s2 { background-color: #fff0f0 } /* Literal.String.Double */
+.se { color: #666666; font-weight: bold; background-color: #fff0f0 } /* Literal.String.Escape */
+.sh { background-color: #fff0f0 } /* Literal.String.Heredoc */
+.si { background-color: #eeeeee } /* Literal.String.Interpol */
+.sx { color: #DD2200; background-color: #fff0f0 } /* Literal.String.Other */
+.sr { color: #000000; background-color: #fff0ff } /* Literal.String.Regex */
+.s1 { background-color: #fff0f0 } /* Literal.String.Single */
+.ss { color: #AA6600 } /* Literal.String.Symbol */
+.bp { color: #007020 } /* Name.Builtin.Pseudo */
+.vc { color: #336699 } /* Name.Variable.Class */
+.vg { color: #dd7700; font-weight: bold } /* Name.Variable.Global */
+.vi { color: #3333BB } /* Name.Variable.Instance */
+.il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */</style>

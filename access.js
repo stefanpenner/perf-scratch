@@ -60,7 +60,7 @@ function checkObjectsD() {
   })
 }
 
-require('./bench')([
+require('do-you-even-bench')([
   { name: '.',      fn: function() { checkObjectsA(); } },
   { name: '[]',     fn: function() { checkObjectsB(); } },
   { name: 'getter', fn: function() { checkObjectsC(); } },

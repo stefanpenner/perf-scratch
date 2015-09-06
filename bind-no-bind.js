@@ -14,7 +14,7 @@ console.log(foo());
 var context = {};
 
 // delete obj.a; // <-- make obj slow
-require('./bench')([
+require('do-you-even-bench')([
   { name: 'static bind',  fn: function() { foo();             } },
   { name: 'runtime bind', fn: function() { bar.bind(context); } },
   { name: 'no bind',      fn: function() { baz();             } }

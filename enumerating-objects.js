@@ -46,7 +46,7 @@ var obj = {
 }
 
 // delete obj.a; // <-- make obj slow
-require('./bench')([
+require('do-you-even-bench')([
   { name: '(a) for (x in y)',                  fn: function() { return a(obj); } },
   { name: '(b) for (x in y) + hasOwnProperty', fn: function() { return b(obj); } },
   { name: '(c) Object.keys + for loop',        fn: function() { return c(obj); } },

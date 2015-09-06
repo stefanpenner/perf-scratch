@@ -13,7 +13,7 @@ function intern(str) {
   return str;
 }
 
-require('./bench')([
+require('do-you-even-bench')([
   { name: 'aaa',        fn: function() { if (a === 'aaaaaaaaaaaaaaaaa') { } } },
   { name: 'a:a',        fn: function() { if (b === 'aaaaaaaaaaaaaaa:a') { } } },
   { name: 'a:a rope',   fn: function() { if (c === 'aaaaaaaaaaaaaaa:a') { } } },

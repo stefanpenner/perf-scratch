@@ -31,10 +31,6 @@ function superFunction() {
 
 var primer = {};
 
-superFunction.call(primer);
-superFunction.call(primer, 1);
-superFunction.call(primer, 1, 2);
-superFunction.call(primer, 1, 2, 3);
 superFunction.call(primer, 1, 2, 3, 4);
 
 %OptimizeFunctionOnNextCall(superFunction);

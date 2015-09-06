@@ -129,7 +129,7 @@ var e = new E();
 var f = new F();
 var g = new G();
 
-require('./bench')([
+require('do-you-even-bench')([
   { name: 'A', fn: function() { return a.ready; } },
   { name: 'B', fn: function() { return b.ready; } },
   { name: 'C', fn: function() { return c.ready; } },

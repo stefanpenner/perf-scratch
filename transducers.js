@@ -44,7 +44,7 @@ var transducer = t.compose(
   t.take(20)
 );
 
-require('./bench')([
+require('do-you-even-bench')([
   { name: 'native',      fn: function() { var result = native(range, 20);               } },
   { name: 'lodash',      fn: function() { var result = lodash(range, 20);               } },
   { name: 'transducer',  fn: function() { var result = t.sequence(transducer, [range]); } },

@@ -190,7 +190,7 @@ for (var i =0; i< LIMIT; i++) {
   list[i] = Math.random() * LIMIT;
 }
 
-require('./bench')([
+require('do-you-even-bench')([
   { name: 'contains1', fn: function() { list.contains1(entry); } },
   { name: 'contains2', fn: function() { list.contains2(entry); } },
   { name: 'contains5', fn: function() { list.contains5(entry); } },

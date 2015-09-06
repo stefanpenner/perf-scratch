@@ -151,7 +151,7 @@ testStruct();
 testStruct2Seal();
 testStruct2();
 
-require('./bench')([
+require('do-you-even-bench')([
   { name: 'new F(x,y)',          fn: testOne         },
   { name: 'new F(pojo)',         fn: testTwo         },
   { name: 'struct (seal)',       fn: testStructSeal  },

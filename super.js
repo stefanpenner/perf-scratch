@@ -75,18 +75,18 @@ Bar.prototype.toMethodName = function() {
 };
 
 Foo.prototype.constructor = Foo;
- 
+
 Foo.prototype.toMethodName = function () {
     return 'FOO' + super.name();
 }.toMethod(Foo.prototype);
 
 Baz.prototype.constructor = Baz;
- 
+
 Baz.prototype.toMethodName = function () {
     return 'Baz' + super.name();
 }.toMethod(Baz.prototype);
- 
- 
+
+
 Foo.prototype._superBar$otherName = Bar.prototype.otherName;
 Baz.prototype._superFoo$otherName = Foo.prototype.otherName;
 
@@ -116,7 +116,7 @@ assert(bar.name() === 'BAR');
 assert(foo.emberName() === 'FOOBAR');
 assert(baz.emberName() === 'BazFOOBAR');
 
-require('./bench')([
+require('do-you-even-bench')([
   { name: 'bar.name', fn: function() { return bar.name(); } },
   { name: 'foo.name', fn: function() { return foo.name(); } },
   { name: 'baz.name', fn: function() { return baz.name(); } },
