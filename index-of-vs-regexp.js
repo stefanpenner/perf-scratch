@@ -23,6 +23,11 @@ require('do-you-even-bench')([
   }
   },
 
+{ name: 'charCodeAt  mix',         fn: function() {
+    var l = a.length;
+    return a.charCodeAt(l - 7) !== 66 && a.indexOf('Binding', l - 7) === -1;
+  }
+  },
   { name: 'indexOf',        fn: function() { return 1 !== a.indexOf('Binding', a.length - 7); } },
   { name: 'RegExp',         fn: function() { return 1 !==  /^.+Binding$/.test(a); }},
   { name: 'substring',      fn: function() { return 'Binding' !==  a.substring(a.length - 7, a.length);}}
