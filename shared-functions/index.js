@@ -44,6 +44,23 @@ function run3() {
     loop(function add(x) { return x + x; });
   }
 }
+
+function run4() {
+  const array = [1,2,3];
+
+  function loop(fn) {
+    for (let i =0; i < array.length; i++) {
+      fn(array[i]);
+    }
+  }
+
+  let add = x => x+x;
+  for (let i =0; i < ITERATIONS; i++) {
+    loop(add);
+  }
+}
+
+
 function measure(name, run) {
   print(name)
   const start = performance.now();
@@ -53,54 +70,127 @@ function measure(name, run) {
   print('\n');
 }
 
-// I expected
 measure('loop(x => x + x)', run1);
 measure('loop(add)', run2);
 measure('loop(function(x) { return x + x; })', run3);
+measure('add = x => x+x;loop(add)', run4);
 
 /* v8:
  *   - sha: 3a7b389
  *   - 5.6.0 (candidate)
  *
- * d8 --trace_opt index.js
+ * d8 --trace_concurrent_recompilation  index.js
  *
  *
  *  OUTPUT: (which suggested shared function recompilation
+ *
+ *
+
+v8: 5.6.0 (candidate) @ 3a7b389
+
 loop(x => x + x)
-[marking 0x2a5f6000cff1 <JS Function x (SharedFunctionInfo 0x85b8aac099)> for optimized recompilation, reason: small function, ICs with typeinfo: 1/1 (100%), generic ICs: 0/1 (0%)]
-[compiling method 0x2a5f6000cff1 <JS Function x (SharedFunctionInfo 0x85b8aac099)> using Crankshaft]
-[marking 0x2a5f6000dc99 <JS Function x (SharedFunctionInfo 0x85b8aac099)> for optimized recompilation, reason: small function, ICs with typeinfo: 1/1 (100%), generic ICs: 0/1 (0%)]
-[marking 0x2a5f6000e8f9 <JS Function x (SharedFunctionInfo 0x85b8aac099)> for optimized recompilation, reason: small function, ICs with typeinfo: 1/1 (100%), generic ICs: 0/1 (0%)]
-[compiling method 0x2a5f6000e8f9 <JS Function x (SharedFunctionInfo 0x85b8aac099)> using Crankshaft]
-[marking 0x2a5f6000f5e9 <JS Function x (SharedFunctionInfo 0x85b8aac099)> for optimized recompilation, reason: small function, ICs with typeinfo: 1/1 (100%), generic ICs: 0/1 (0%)]
-[compiling method 0x2a5f6000f5e9 <JS Function x (SharedFunctionInfo 0x85b8aac099)> using Crankshaft]
-[optimizing 0x2a5f6000cff1 <JS Function x (SharedFunctionInfo 0x85b8aac099)> - took 0.110, 0.142, 0.065 ms]
-[completed optimizing 0x2a5f6000cff1 <JS Function x (SharedFunctionInfo 0x85b8aac099)>]
-[optimizing 0x2a5f6000e8f9 <JS Function x (SharedFunctionInfo 0x85b8aac099)> - took 0.018, 0.112, 0.010 ms]
-[completed optimizing 0x2a5f6000e8f9 <JS Function x (SharedFunctionInfo 0x85b8aac099)>]
-[optimizing 0x2a5f6000f5e9 <JS Function x (SharedFunctionInfo 0x85b8aac099)> - took 0.014, 0.038, 0.008 ms]
-[completed optimizing 0x2a5f6000f5e9 <JS Function x (SharedFunctionInfo 0x85b8aac099)>]
-[marking 0x2a5f6000b701 <JS Function loop (SharedFunctionInfo 0x85b8aabfd1)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 7/7 (100%), generic ICs: 1/7 (14%)]
-[compiling method 0x2a5f6000b701 <JS Function loop (SharedFunctionInfo 0x85b8aabfd1)> using Crankshaft]
-[optimizing 0x2a5f6000b701 <JS Function loop (SharedFunctionInfo 0x85b8aabfd1)> - took 0.164, 0.270, 0.062 ms]
-[completed optimizing 0x2a5f6000b701 <JS Function loop (SharedFunctionInfo 0x85b8aabfd1)>]
-[marking 0x85b8aab8b9 <JS Function run1 (SharedFunctionInfo 0x85b8aab3b9)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 6/5 (120%), generic ICs: 0/5 (0%)]
-[compiling method 0x85b8aab8b9 <JS Function run1 (SharedFunctionInfo 0x85b8aab3b9)> using Crankshaft OSR]
-[optimizing 0x85b8aab8b9 <JS Function run1 (SharedFunctionInfo 0x85b8aab3b9)> - took 0.224, 0.361, 0.082 ms]
- - duration: 97.295
+ - duration: 66.922
 
 
 loop(add)
-[marking 0x14b2a19e8989 <JS Function add (SharedFunctionInfo 0x85b8ab6939)> for optimized recompilation, reason: small function, ICs with typeinfo: 1/1 (100%), generic ICs: 0/1 (0%)]
-[compiling method 0x14b2a19e8989 <JS Function add (SharedFunctionInfo 0x85b8ab6939)> using Crankshaft]
-[optimizing 0x14b2a19e8989 <JS Function add (SharedFunctionInfo 0x85b8ab6939)> - took 0.057, 0.066, 0.020 ms]
-[completed optimizing 0x14b2a19e8989 <JS Function add (SharedFunctionInfo 0x85b8ab6939)>]
-[marking 0x14b2a19e8941 <JS Function loop (SharedFunctionInfo 0x85b8ab6871)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 8/7 (114%), generic ICs: 0/7 (0%)]
-[compiling method 0x14b2a19e8941 <JS Function loop (SharedFunctionInfo 0x85b8ab6871)> using Crankshaft]
-[optimizing 0x14b2a19e8941 <JS Function loop (SharedFunctionInfo 0x85b8ab6871)> - took 0.095, 0.235, 0.035 ms]
-[completed optimizing 0x14b2a19e8941 <JS Function loop (SharedFunctionInfo 0x85b8ab6871)>]
-[marking 0x85b8aab939 <JS Function run2 (SharedFunctionInfo 0x85b8aab481)> for optimized recompilation, reason: hot and stable, ICs with typeinfo: 6/5 (120%), generic ICs: 0/5 (0%)]
-[compiling method 0x85b8aab939 <JS Function run2 (SharedFunctionInfo 0x85b8aab481)> using Crankshaft OSR]
-[optimizing 0x85b8aab939 <JS Function run2 (SharedFunctionInfo 0x85b8aab481)> - took 0.254, 0.340, 0.091 ms]
- - duration: 14.87400000000001
+ - duration: 13.116
+
+
+loop(function(x) { return x + x; })
+ - duration: 61.10300000000001
+
+
+add = x => x+x;loop(add)
+ - duration: 16.197000000000003
+
+loop(x => x + x)
+  ** Marking 0x250d1a28d889 <JS Function x (SharedFunctionInfo 0x117c76aac461)> for concurrent recompilation.
+  ** Queued 0x250d1a28d889 <JS Function x (SharedFunctionInfo 0x117c76aac461)> for concurrent optimization.
+  ** Marking 0x250d1a28e531 <JS Function x (SharedFunctionInfo 0x117c76aac461)> for concurrent recompilation.
+  ** Marking 0x250d1a28f191 <JS Function x (SharedFunctionInfo 0x117c76aac461)> for concurrent recompilation.
+  ** Queued 0x250d1a28f191 <JS Function x (SharedFunctionInfo 0x117c76aac461)> for concurrent optimization.
+  ** Marking 0x250d1a28fe81 <JS Function x (SharedFunctionInfo 0x117c76aac461)> for concurrent recompilation.
+  ** Queued 0x250d1a28fe81 <JS Function x (SharedFunctionInfo 0x117c76aac461)> for concurrent optimization.
+  ** Marking 0x250d1a290b29 <JS Function x (SharedFunctionInfo 0x117c76aac461)> for concurrent recompilation.
+  ** Marking 0x250d1a291039 <JS Function x (SharedFunctionInfo 0x117c76aac461)> for concurrent recompilation.
+  ** Marking 0x250d1a28bf99 <JS Function loop (SharedFunctionInfo 0x117c76aac399)> for concurrent recompilation.
+  ** Queued 0x250d1a28bf99 <JS Function loop (SharedFunctionInfo 0x117c76aac399)> for concurrent optimization.
+  ** Marking 0x117c76aabb81 <JS Function run1 (SharedFunctionInfo 0x117c76aab479)> for concurrent recompilation.
+
+loop(add)
+  ** Marking 0x383fe9be9ab1 <JS Function add (SharedFunctionInfo 0x117c76ab7599)> for concurrent recompilation.
+  ** Queued 0x383fe9be9ab1 <JS Function add (SharedFunctionInfo 0x117c76ab7599)> for concurrent optimization.
+  ** Marking 0x383fe9be9a69 <JS Function loop (SharedFunctionInfo 0x117c76ab74d1)> for concurrent recompilation.
+  ** Queued 0x383fe9be9a69 <JS Function loop (SharedFunctionInfo 0x117c76ab74d1)> for concurrent optimization.
+  ** Marking 0x117c76aabc01 <JS Function run2 (SharedFunctionInfo 0x117c76aab541)> for concurrent recompilation.
+
+loop(function(x) { return x + x; })
+  ** Marking 0x383fe9bebd21 <JS Function add (SharedFunctionInfo 0x117c76ab9dc1)> for concurrent recompilation.
+  ** Queued 0x383fe9bebd21 <JS Function add (SharedFunctionInfo 0x117c76ab9dc1)> for concurrent optimization.
+  ** Marking 0x383fe9bec9c9 <JS Function add (SharedFunctionInfo 0x117c76ab9dc1)> for concurrent recompilation.
+  ** Marking 0x383fe9bed629 <JS Function add (SharedFunctionInfo 0x117c76ab9dc1)> for concurrent recompilation.
+  ** Queued 0x383fe9bed629 <JS Function add (SharedFunctionInfo 0x117c76ab9dc1)> for concurrent optimization.
+  ** Marking 0x383fe9bea431 <JS Function loop (SharedFunctionInfo 0x117c76ab9cf9)> for concurrent recompilation.
+  ** Queued 0x383fe9bea431 <JS Function loop (SharedFunctionInfo 0x117c76ab9cf9)> for concurrent optimization.
+  ** Marking 0x117c76aabc81 <JS Function run3 (SharedFunctionInfo 0x117c76aab609)> for concurrent recompilation.
+
+--------------
+
+v8: 5.6.0 (candidate) @ a4ff04a
+
+loop(x => x + x)
+ - duration: 68.034
+
+
+loop(add)
+ - duration: 13.295000000000002
+
+
+loop(function(x) { return x + x; })
+ - duration: 63.798
+
+add = x => x+x;loop(add)
+ - duration: 15.48999999999998
+
+------
+
+loop(x => x + x)
+  ** Marking 0x3555ec38d4a1 <JS Function x (SharedFunctionInfo 0x90055eac461)> for concurrent recompilation.
+  ** Queued 0x3555ec38d4a1 <JS Function x (SharedFunctionInfo 0x90055eac461)> for concurrent optimization.
+  ** Marking 0x3555ec38e149 <JS Function x (SharedFunctionInfo 0x90055eac461)> for concurrent recompilation.
+  ** Marking 0x3555ec38eda9 <JS Function x (SharedFunctionInfo 0x90055eac461)> for concurrent recompilation.
+  ** Queued 0x3555ec38eda9 <JS Function x (SharedFunctionInfo 0x90055eac461)> for concurrent optimization.
+  ** Marking 0x3555ec38fa99 <JS Function x (SharedFunctionInfo 0x90055eac461)> for concurrent recompilation.
+  ** Queued 0x3555ec38fa99 <JS Function x (SharedFunctionInfo 0x90055eac461)> for concurrent optimization.
+  ** Marking 0x3555ec390741 <JS Function x (SharedFunctionInfo 0x90055eac461)> for concurrent recompilation.
+  ** Marking 0x3555ec390981 <JS Function x (SharedFunctionInfo 0x90055eac461)> for concurrent recompilation.
+  ** Marking 0x3555ec38bbb1 <JS Function loop (SharedFunctionInfo 0x90055eac399)> for concurrent recompilation.
+  ** Queued 0x3555ec38bbb1 <JS Function loop (SharedFunctionInfo 0x90055eac399)> for concurrent optimization.
+  ** Marking 0x90055eabb81 <JS Function run1 (SharedFunctionInfo 0x90055eab479)> for concurrent recompilation.
+
+loop(add)
+  ** Marking 0x25b9c0f69319 <JS Function add (SharedFunctionInfo 0x90055eb71b1)> for concurrent recompilation.
+  ** Queued 0x25b9c0f69319 <JS Function add (SharedFunctionInfo 0x90055eb71b1)> for concurrent optimization.
+  ** Marking 0x25b9c0f692d1 <JS Function loop (SharedFunctionInfo 0x90055eb70e9)> for concurrent recompilation.
+  ** Queued 0x25b9c0f692d1 <JS Function loop (SharedFunctionInfo 0x90055eb70e9)> for concurrent optimization.
+  ** Marking 0x90055eabc01 <JS Function run2 (SharedFunctionInfo 0x90055eab541)> for concurrent recompilation.
+
+loop(function(x) { return x + x; })
+  ** Marking 0x25b9c0f6b589 <JS Function add (SharedFunctionInfo 0x90055eb99c9)> for concurrent recompilation.
+  ** Queued 0x25b9c0f6b589 <JS Function add (SharedFunctionInfo 0x90055eb99c9)> for concurrent optimization.
+  ** Marking 0x25b9c0f6c231 <JS Function add (SharedFunctionInfo 0x90055eb99c9)> for concurrent recompilation.
+  ** Marking 0x25b9c0f6ce91 <JS Function add (SharedFunctionInfo 0x90055eb99c9)> for concurrent recompilation.
+  ** Queued 0x25b9c0f6ce91 <JS Function add (SharedFunctionInfo 0x90055eb99c9)> for concurrent optimization.
+  ** Marking 0x25b9c0f6d551 <JS Function add (SharedFunctionInfo 0x90055eb99c9)> for concurrent recompilation.
+  ** Marking 0x25b9c0f69c99 <JS Function loop (SharedFunctionInfo 0x90055eb9901)> for concurrent recompilation.
+  ** Queued 0x25b9c0f69c99 <JS Function loop (SharedFunctionInfo 0x90055eb9901)> for concurrent optimization.
+  ** Marking 0x90055eabc81 <JS Function run3 (SharedFunctionInfo 0x90055eab609)> for concurrent recompilation.
+
+add = x => x+x;loop(add)
+  ** Marking 0x25b9c0f41b09 <JS Function add (SharedFunctionInfo 0x90055ebc9e1)> for concurrent recompilation.
+  ** Queued 0x25b9c0f41b09 <JS Function add (SharedFunctionInfo 0x90055ebc9e1)> for concurrent optimization.
+  ** Marking 0x25b9c0f41a91 <JS Function loop (SharedFunctionInfo 0x90055ebc919)> for concurrent recompilation.
+  ** Queued 0x25b9c0f41a91 <JS Function loop (SharedFunctionInfo 0x90055ebc919)> for concurrent optimization.
+  ** Marking 0x90055eabd01 <JS Function run4 (SharedFunctionInfo 0x90055eab6d1)> for concurrent recompilation.
+
 */
