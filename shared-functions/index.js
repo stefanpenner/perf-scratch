@@ -31,6 +31,19 @@ function run2() {
   }
 }
 
+function run3() {
+  const array = [1,2,3];
+
+  function loop(fn) {
+    for (let i =0; i < array.length; i++) {
+      fn(array[i]);
+    }
+  }
+
+  for (let i =0; i < ITERATIONS; i++) {
+    loop(function add(x) { return x + x; });
+  }
+}
 function measure(name, run) {
   print(name)
   const start = performance.now();
@@ -40,8 +53,10 @@ function measure(name, run) {
   print('\n');
 }
 
+// I expected
 measure('loop(x => x + x)', run1);
 measure('loop(add)', run2);
+measure('loop(function(x) { return x + x; })', run3);
 
 /* v8:
  *   - sha: 3a7b389
@@ -50,7 +65,7 @@ measure('loop(add)', run2);
  * d8 --trace_opt index.js
  *
  *
-
+ *  OUTPUT: (which suggested shared function recompilation
 loop(x => x + x)
 [marking 0x2a5f6000cff1 <JS Function x (SharedFunctionInfo 0x85b8aac099)> for optimized recompilation, reason: small function, ICs with typeinfo: 1/1 (100%), generic ICs: 0/1 (0%)]
 [compiling method 0x2a5f6000cff1 <JS Function x (SharedFunctionInfo 0x85b8aac099)> using Crankshaft]
@@ -88,8 +103,4 @@ loop(add)
 [compiling method 0x85b8aab939 <JS Function run2 (SharedFunctionInfo 0x85b8aab481)> using Crankshaft OSR]
 [optimizing 0x85b8aab939 <JS Function run2 (SharedFunctionInfo 0x85b8aab481)> - took 0.254, 0.340, 0.091 ms]
  - duration: 14.87400000000001
- * 
 */
-
-
-
