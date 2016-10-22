@@ -26,6 +26,47 @@ global.CHARCODEAT = function (key) {
     key.charCodeAt(l - 1) === 103;
 }
 
+function printStatus(fn) {
+  switch(%GetOptimizationStatus(fn)) {
+    case 1: console.log("Function is optimized"); break;
+    case 2: console.log("Function is not optimized"); break;
+    case 3: console.log("Function is always optimized"); break;
+    case 4: console.log("Function is never optimized"); break;
+    case 6: console.log("Function is maybe deoptimized"); break;
+  }
+}
+
+for (var i =0; i < 100; i++) {
+  "asdf".charCodeAt(1);
+  "asdf".charAt(1);
+
+  %OptimizeFunctionOnNextCall("asdf".charCodeAt);
+  %OptimizeFunctionOnNextCall("asdf".charAt);
+
+  "asdf".charCodeAt(1);
+  "asdf".charAt(1);
+
+  printStatus("asdf".charCodeAt);
+  printStatus("asdf".charAt);
+
+  "asdf".charCodeAt(10);
+  "asdf".charAt(10);
+
+  printStatus("asdf".charCodeAt);
+  printStatus("asdf".charAt);
+
+  %OptimizeFunctionOnNextCall("asdf".charCodeAt);
+  %OptimizeFunctionOnNextCall("asdf".charAt);
+
+  "asdf".charCodeAt(1);
+  "asdf".charAt(1);
+}
+
+  printStatus("asdf".charCodeAt);
+  printStatus("asdf".charAt);
+
+// process.exit();
+
 global.IS_BINDING = /^.+Binding$/;
 global.REGEX = function (key) {
   return key.length > 7 && IS_BINDING.test(key);
