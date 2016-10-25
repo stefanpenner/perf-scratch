@@ -1,4 +1,5 @@
 
+
 function run1() {
   var x = 0;
 
@@ -7,7 +8,7 @@ function run1() {
   }
 
   for (var i = 0; i < 1000000; ++i) {
-    x += bar(a => a, i);
+    x += bar(a => Math.sqrt(a), i);
   }
   return x;
 }
@@ -20,7 +21,7 @@ function run2() {
     return f(i);
   }
 
-  function identity(x) { return x; }
+  function identity(x) { return Math.sqrt(x); }
   for (var i = 0; i < 1000000; ++i) {
     x += bar(identity, i);
   }
@@ -35,7 +36,7 @@ function run3() {
   }
 
   for (var i = 0; i < 1000000; ++i) {
-    function identity(x) { return x; }
+    function identity(x) { return Math.sqrt(x); }
     x += bar(identity, i);
   }
   return x;
