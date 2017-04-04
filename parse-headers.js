@@ -83,7 +83,7 @@ function parseResponseHeadersNew(headersString) {
 }
 
 // I don't believe they are ropes when we get them from the platform
-const HEADER = intern([
+const HEADER = [
   'Date: Wed, 15 Mar 2017 15:57:19 GMT',
   'Cache-Control: private, max-age=0, must-revalidate',
   'Last-Modified: Tue, 14 Mar 2017 21:25:26 GMT',
@@ -91,21 +91,35 @@ const HEADER = intern([
   'X-Powered-By: Express',
   'Vary: Accept-Encoding',
   'Content-Type: application/json'
-].join(CLRF));
+].join(CLRF);
+
+const HEADER_INTERNED  = intern(HEADER);
 
 console.log(parseResponseHeaders(HEADER));
 console.log(parseResponseHeadersNew(HEADER));
 require('do-you-even-bench')([
   {
+    name: 'new (interned input)',
+    fn() {
+      parseResponseHeadersNew(HEADER_INTERNED);
+    }
+  },
+  {
+    name: 'current (interned input)',
+    fn() {
+      parseResponseHeaders(HEADER_INTERNED);
+    }
+  },
+  {
     name: 'new',
     fn() {
-      parseResponseHeadersNew(HEADER);
+      parseResponseHeadersNew(HEADER_INTERNED);
     }
   },
   {
     name: 'current',
     fn() {
-      parseResponseHeaders(HEADER);
+      parseResponseHeaders(HEADER_INTERNED);
     }
   }
 ])
