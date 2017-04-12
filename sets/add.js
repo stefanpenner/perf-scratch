@@ -97,10 +97,10 @@ o.add("foo", "foo");
 
 console.log('unique add:');
 require('do-you-even-bench')([
-  { name: 'duplicate [].push 1',               fn: arrayAdd(1, ENTITY) },
-  { name: 'duplicate new Set().add 1',         fn: setAdd(1, ENTITY) },
-  { name: 'duplicate new OrderedSet().add 1',  fn: oSetAdd(1, ENTITY) },
-  { name: 'duplicate new FOrderedSet().add 1', fn: fOSetAdd(1, ENTITY) },
+  { name: 'duplicate [].push 1',         fn: arrayAdd(1, ENTITY) },
+  { name: 'duplicate new Set().add 1',   fn: setAdd(1, ENTITY) },
+  { name: 'duplicate new OSet().add 1',  fn: oSetAdd(1, ENTITY) },
+  { name: 'duplicate new FOSet().add 1', fn: fOSetAdd(1, ENTITY) },
 
   { name: 'duplicate [].push 10',          fn: arrayAdd(10, ENTITY) },
   { name: 'duplicate new Set().add 10',    fn: setAdd(10, ENTITY) },
