@@ -64,7 +64,7 @@ OrderedSet.prototype = {
     @private
   */
   clear() {
-    this.presenceSet = undefined;//Object.create(null);
+    this.presence = undefined;//Object.create(null);
     this._value = undefined;
     this._list  = undefined;
     this.size = 0;
@@ -116,17 +116,17 @@ OrderedSet.prototype = {
   _slowAdd(obj, size) {
     if (size === THRESHOLD) {
       // upgrade to index set
-      this.presenceSet = Object.create(null);
+      this.presence = new Map();
       let list = this.list;
       for (let i = 0; i < list.length; i++) {
         let item = list[i];
-        this.presenceSet[item.__id__] = true;
+        this.presence.set(item, true);
       }
     }
-    let presenceSet = this.presenceSet;
+    let presence = this.presence;
 
-    if (presenceSet !== undefined && presenceSet[obj.__id__] !== true) {
-      presenceSet[obj.__id__] = true;
+    if (presence !== undefined && presence.has(obj)) {
+      presence.add(obj.__id__, true);
       this.size = this.list.push(obj);
     } else {
       this.list = obj;
@@ -157,8 +157,8 @@ OrderedSet.prototype = {
     }
 
     if (size >= THRESHOLD) {
-      if (presenceSet[guid] === true) {
-        delete presenceSet[guid];
+      if (presence[guid] === true) {
+        presence.delete(obj);
       } else {
         return false;
       }
@@ -203,7 +203,7 @@ OrderedSet.prototype = {
 
       return false;
     } else {
-      return this.presenceSet[guid] === true;
+      return this.presence.has(obj);
     }
   },
 
@@ -251,8 +251,8 @@ OrderedSet.prototype = {
     let Constructor = this.constructor;
     let set = new Constructor();
 
-    if (this.presenceSet) {
-      set.presenceSet = copyNull(this.presenceSet);
+    if (this.presence) {
+      set.presence = copyNull(this.presence);
       set.list = this.toArray();
       set.size = this.size;
     }
