@@ -3,30 +3,32 @@
  *
  *
  *
- * s/s/perf-scratch/dir-hash-checksum ╍{} node index.js                                                                                (12s 725ms)
- * 1477328276
- * UINT32 { _low: 16989, _high: 39108, remainder: null }
- * 2562998877
- * testing
- * - xxh pure
- * - xxh pure + reuse
- * - xxh native
- * - md5 + hex
- * - md5 + base64
- * - sha1 + hex
- * - sha1 + base64
- * - sha256 + hex
- * - sha256 + base64
- * running first test, please wait...
- *   xxh pure .............. 323,907.77 op/s
- *   xxh pure + reuse ...... 329,596.20 op/s
- *   xxh native .......... 2,532,263.18 op/s
- *   md5 + hex ............. 383,736.19 op/s
- *   md5 + base64 .......... 395,480.05 op/s
- *   sha1 + hex ............ 423,839.71 op/s
- *   sha1 + base64 ......... 419,817.77 op/s
- *   sha256 + hex .......... 393,169.49 op/s
- *   sha256 + base64 ....... 379,109.45 op/s
+testing
+- xxh pure
+- xxh pure + reuse
+- xxh native
+- murmurhash3jsRevisited
+- string-hash (collsions common)
+- string-hash-forward (collisions common)
+- md5 + hex
+- md5 + base64
+- sha1 + hex
+- sha1 + base64
+- sha256 + hex
+- sha256 + base64
+running first test, please wait...
+  xxh pure ..................................... 311,503.34 op/s
+  xxh pure + reuse ............................. 333,059.55 op/s
+  xxh native ................................. 2,614,670.55 op/s
+  murmurhash3jsRevisited ....................... 322,880.64 op/s
+  string-hash (collsions common) ............. 3,897,143.59 op/s
+  string-hash-forward (collisions common) .... 4,528,759.20 op/s
+  md5 + hex .................................... 411,181.46 op/s
+  md5 + base64 ................................. 408,358.86 op/s
+  sha1 + hex ................................... 415,767.51 op/s
+  sha1 + base64 ................................ 409,282.87 op/s
+  sha256 + hex ................................. 378,464.64 op/s
+  sha256 + base64 .............................. 378,379.54 op/s
  */
 const stringHash  = require('string-hash');
 const crypto = require('crypto');

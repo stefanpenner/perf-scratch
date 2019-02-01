@@ -16,8 +16,13 @@ const fs = require('fs');
 const walkSync = require('walk-sync');
 const path = require('path');
 const PATHS = walkSync('../', { includeBasePath: true }).map(x => path.join(__dirname, x));
-
 const crypto = require('crypto');
+
+const x = PATHS.join().length;
+const y = PATHS.map(x => crypto.createHash('md5').update(x).digest('hex')).join().length;
+
+console.log(x, y, y/x);
+
 
 function makeDict(paths) {
   const dict = Object.create(null);
