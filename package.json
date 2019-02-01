@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/stefanpenner/perf-scratch",
   "dependencies": {
-    "do-you-even-bench": "^1.0.0"
+    "do-you-even-bench": "^1.0.0",
+    "murmurhash3js-revisited": "^3.0.0",
+    "string-hash": "^1.1.3",
+    "xxhash": "^0.2.4",
+    "xxhashjs": "^0.2.2"
   }
 }

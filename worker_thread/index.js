@@ -15,7 +15,7 @@ if (isMainThread) {
   console.time('main: babel-core');
   require('babel-core');
   console.timeEnd('main: babel-core');
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 10; i++) {
     new Worker(__filename, {
       workerData: __filename
     });
@@ -24,4 +24,8 @@ if (isMainThread) {
   console.time('thread: babel-core');
   require('babel-core');
   console.timeEnd('thread: babel-core');
+setInterval(() => require('babel-core'), 100)
 }
+
+
+setInterval(() => require('babel-core'), 100)
