@@ -1,0 +1,9 @@
+{
+  "name": "dir-hash-checksum",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "walk-sync": "^1.0.1"
+  }
+}
